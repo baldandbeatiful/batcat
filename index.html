@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./img/logo.png">
+    <title>
+        BATCAT
+    </title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="rain"></div>
+        <header class="header">
+            <div class="header__container">
+                <img src="./img/header.png" alt="" class="header__image">
+                <p class="header__text">
+                    $BATCAT
+                </p>
+            </div>
+        </header>
+        <main class="main">
+            <div class="main__container">
+                <img src="./img/cat.png" alt="" class="left-cat">
+                <img src="./img/light.png" alt="" class="right-light">
+                <span class="main__status">BATCAT</span>
+                <h1 class="main__title">
+                    BATCAT<br>
+                    <span>CITY</span>
+                </h1>
+                <p class="main__text">
+                    “They hide the strongest creature on the planet on a small farm in Kansas.”
+                </p>
+                <div class="main__address-container">
+                    <input type="text" class="main__address" value="" readonly>
+                    <img src="./img/copy.svg" alt="" class="copy">
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <span class="footer__time">
+                20:27
+            </span>
+        </footer>
+    </div>
+    <audio src="./aud/ss.mp4" loop autoplay></audio>
+
+    <script>
+        const timeElement = document.querySelector('.footer__time');
+        const copyAddressBtn = document.querySelector('.copy');
+        const addressValue = document.querySelector('.main__address').value;
+        const audioElements = document.getElementsByTagName('audio');
+
+        for (let i = 0; i < audioElements.length; i++) {
+            audioElements[i].volume = 0.3;
+        }
+
+        function updateTime() {
+            const currentTime = new Date();
+            const hours = currentTime.getHours().toString().padStart(2, '0');
+            const minutes = currentTime.getMinutes().toString().padStart(2, '0');
+            const formattedTime = `${hours}:${minutes}`;
+
+            timeElement.textContent = formattedTime;
+        }
+
+        function copyToClipboard() {
+            const el = document.createElement('textarea');
+            el.value = addressValue;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        }
+
+        updateTime();
+
+        setInterval(updateTime, 1000);
+
+        copyAddressBtn.addEventListener('click', copyToClipboard);
+    </script>
+</body>
+</html>
